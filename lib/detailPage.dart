@@ -109,8 +109,7 @@ insertSql(
   ));
   // Fluttertoast.showToast(msg: 'sql에 저장', toastLength: Toast.LENGTH_SHORT);
   Fluttertoast.showToast(msg: '버튼 클릭', toastLength: Toast.LENGTH_SHORT);
-  final col=FirebaseFirestore.instance.collection("$id ").doc("$dateTime ");
-  col.set({
+  final col=FirebaseFirestore.instance.collection("$id ").doc("$dateTime ").set({
     "id":id,
     "device":device,
     "patchTemp":patchTemp,
@@ -119,7 +118,7 @@ insertSql(
     "rawData":rawData,
     "timeStamp":timeStamp,
     "dateTime":dateTime,
-  });
+  }); //Fire Stroe 연동
 }
 
 // 갑작스럽게 연결이 끊기거나, 끊을 때 저장
