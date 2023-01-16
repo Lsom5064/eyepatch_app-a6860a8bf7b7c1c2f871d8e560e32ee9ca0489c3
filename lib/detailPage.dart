@@ -6,18 +6,18 @@ import 'dart:typed_data';
 import 'package:eyepatch_app/database/dbHelper.dart';
 import 'package:eyepatch_app/model.dart/ble.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hex/hex.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:vibration/vibration.dart';
 import 'randomforestclassifier.dart';
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
+import 'package:vibration/vibration.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 // 해당 기기를 선택한 후 해당 기기에 관한 정보 페이지(패치 착용 여부 등을 보여주는)
 class DetailPage extends StatefulWidget {
