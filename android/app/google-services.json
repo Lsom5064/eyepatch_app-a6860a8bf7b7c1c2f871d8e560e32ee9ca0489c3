@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "504559553465",
+    "project_id": "dtx-eye-fd2c1",
+    "storage_bucket": "dtx-eye-fd2c1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504559553465:android:f279305d4150f363878468",
+        "android_client_info": {
+          "package_name": "com.eyepatch.eyepatch_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "504559553465-3aqdh2vl9askbl161l3c4j420uqvpoda.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJbi2DFwzdy1TJeesPmi6XzxFT4-1-Q3E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "504559553465-3aqdh2vl9askbl161l3c4j420uqvpoda.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
