@@ -545,75 +545,75 @@ class _DetailPageState extends State<DetailPage> {
                                 ),
                               ),
                               const SizedBox(height: 16),
-                              // Row(
-                              //   mainAxisAlignment: MainAxisAlignment.center,
-                              //   children: [
-                              //     TextButton(
-                              //         style: TextButton.styleFrom(
-                              //           elevation: 5,
-                              //           backgroundColor: !started
-                              //               ? const Color.fromARGB(
-                              //                   255, 61, 137, 199)
-                              //               : const Color.fromARGB(
-                              //                   255, 199, 29, 17),
-                              //         ),
-                              //         onPressed: () {
-                              //           if (snapshot.hasData) {
-                              //             FlutterBackgroundService()
-                              //                 .invoke("setAsBackground");
-                              //             insertCsv(snapshot.data!,
-                              //                 widget.dbHelper, startedTime);
-                              //             setState(() {
-                              //               started = !started;
-                              //               startedTime = DateTime.now()
-                              //                   .millisecondsSinceEpoch;
-                              //             });
-                              //           } else {
-                              //             Fluttertoast.showToast(
-                              //                 msg: '아직 온도 정보를 불러오기 전입니다.');
-                              //           }
-                              //         },
-                              //         child: Padding(
-                              //           padding: const EdgeInsets.all(6.0),
-                              //           child: Text(
-                              //             !started ? '실험 시작' : '실험 종료',
-                              //             textAlign: TextAlign.center,
-                              //             style: const TextStyle(
-                              //               color: Colors.white,
-                              //               fontSize: 24,
-                              //             ),
-                              //           ),
-                              //         )),
-                              //     const SizedBox(width: 50),
-                              //     TextButton(
-                              //         style: TextButton.styleFrom(
-                              //           elevation: 5,
-                              //           backgroundColor: const Color.fromARGB(
-                              //               255, 87, 86, 87),
-                              //         ),
-                              //         onPressed: () {
-                              //           // 그냥 버튼 눌렀다는 표시와 타임스탬프를 넣는다.
-                              //           if (snapshot.hasData) {
-                              //             insertSql(snapshot.data!,
-                              //                 widget.dbHelper, true, patched);
-                              //           } else {
-                              //             Fluttertoast.showToast(
-                              //                 msg: '아직 온도 정보를 불러오기 전입니다.');
-                              //           }
-                              //         },
-                              //         child: const Padding(
-                              //           padding: EdgeInsets.all(7.0),
-                              //           child: Text(
-                              //             '버튼',
-                              //             textAlign: TextAlign.center,
-                              //             style: TextStyle(
-                              //               color: Colors.white,
-                              //               fontSize: 24,
-                              //             ),
-                              //           ),
-                              //         )),
-                              //   ],
-                              // ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  TextButton(
+                                      style: TextButton.styleFrom(
+                                        elevation: 5,
+                                        backgroundColor: !started
+                                            ? const Color.fromARGB(
+                                                255, 61, 137, 199)
+                                            : const Color.fromARGB(
+                                                255, 199, 29, 17),
+                                      ),
+                                      onPressed: () {
+                                        if (snapshot.hasData) {
+                                          FlutterBackgroundService()
+                                              .invoke("setAsBackground");
+                                          insertCsv(snapshot.data!,
+                                              widget.dbHelper, startedTime);
+                                          setState(() {
+                                            started = !started;
+                                            startedTime = DateTime.now()
+                                                .millisecondsSinceEpoch;
+                                          });
+                                        } else {
+                                          Fluttertoast.showToast(
+                                              msg: '아직 온도 정보를 불러오기 전입니다.');
+                                        }
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(6.0),
+                                        child: Text(
+                                          !started ? '실험 시작' : '실험 종료',
+                                          textAlign: TextAlign.center,
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 24,
+                                          ),
+                                        ),
+                                      )),
+                                  const SizedBox(width: 50),
+                                  TextButton(
+                                      style: TextButton.styleFrom(
+                                        elevation: 5,
+                                        backgroundColor: const Color.fromARGB(
+                                            255, 87, 86, 87),
+                                      ),
+                                      onPressed: () {
+                                        // 그냥 버튼 눌렀다는 표시와 타임스탬프를 넣는다.
+                                        if (snapshot.hasData) {
+                                          insertSql(snapshot.data!,
+                                              widget.dbHelper, true, patched);
+                                        } else {
+                                          Fluttertoast.showToast(
+                                              msg: '아직 온도 정보를 불러오기 전입니다.');
+                                        }
+                                      },
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(7.0),
+                                        child: Text(
+                                          '버튼',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 24,
+                                          ),
+                                        ),
+                                      )),
+                                ],
+                              ),
                             ],
                           ),
                         ),
