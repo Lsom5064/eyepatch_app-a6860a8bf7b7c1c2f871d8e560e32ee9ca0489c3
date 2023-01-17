@@ -109,7 +109,7 @@ insertSql(
   ));
   // Fluttertoast.showToast(msg: 'sql에 저장', toastLength: Toast.LENGTH_SHORT);
   Fluttertoast.showToast(msg: '버튼 클릭', toastLength: Toast.LENGTH_SHORT);
-  final col=FirebaseFirestore.instance.collection("$id ").doc("$dateTime ").set({
+  final col=FirebaseFirestore.instance.collection("$device ").doc("$dateTime ").set({
     "id":id,
     "device":device,
     "patchTemp":patchTemp,
