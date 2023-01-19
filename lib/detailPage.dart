@@ -109,7 +109,7 @@ insertSql(
   ));
   // Fluttertoast.showToast(msg: 'sql에 저장', toastLength: Toast.LENGTH_SHORT);
   Fluttertoast.showToast(msg: '버튼 클릭', toastLength: Toast.LENGTH_SHORT);
-  final col=FirebaseFirestore.instance.collection("$device ").doc("$dateTime ").set({
+  dynamic col=FirebaseFirestore.instance.collection("$device").doc("$dateTime").set({
     "id":id,
     "device":device,
     "patchTemp":patchTemp,
@@ -179,7 +179,7 @@ class _DetailPageState extends State<DetailPage> {
           (results) {
             if (tempTick < timer.tick) {
               // print('스캔 결과');
-
+              //  results.contains(widget.result); 포문 대신 조건문설정 하면 안되는것인지?
               for (ScanResult r in results) {
                 if (r.device.id == widget.result.device.id) { // 스캔 결과에 있는 기기 id와 이전 페이지(main.dart)에서 받아온 device id와 같으면
                   currentData = r; // 현재 기기 설정
