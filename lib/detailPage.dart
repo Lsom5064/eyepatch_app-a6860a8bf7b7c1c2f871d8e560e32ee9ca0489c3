@@ -179,7 +179,15 @@ class _DetailPageState extends State<DetailPage> {
           (results) {
             if (tempTick < timer.tick) {
               // print('스캔 결과');
+
               //  results.contains(widget.result); 포문 대신 조건문설정 하면 안되는것인지?
+             /* if(results.contains(widget.result.device.id)){ // 스캔 결과에 있는 기기 id와 이전 페이지(main.dart)에서 받아온 device id와 같으면
+                currentData = widget.result; // 현재 기기 설정
+                dataError = false; // found device
+              } else {
+                dataError = true; // not found device
+              }*/
+
               for (ScanResult r in results) {
                 if (r.device.id == widget.result.device.id) { // 스캔 결과에 있는 기기 id와 이전 페이지(main.dart)에서 받아온 device id와 같으면
                   currentData = r; // 현재 기기 설정
