@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:html';
 import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/services.dart';
@@ -35,7 +36,6 @@ class DetailPage extends StatefulWidget {
   @override
   _DetailPageState createState() => _DetailPageState();
 }
-
 // 온도 계산 함수 (raw data를 이용해 패치 내부 온도와 주변 온도를 계산해서 리턴
 double calculate(Uint8List advertisingData, bool isPatch) { // isPatch가 true일 경우: 패치 내부 온도 리턴 / isPatch가 false일 경우: 주변 온도 리턴
   if (advertisingData.isEmpty) return 0.0;
@@ -75,7 +75,7 @@ double calculate(Uint8List advertisingData, bool isPatch) { // isPatch가 true�
 insertSql(
     ScanResult info, DBHelper dbHelper, bool justButton, bool patched) async {
   int id;String device;double patchTemp;double ambientTemp;String patch;String rawData;
-  int timeStamp;String dateTime;
+  int timeStamp;String dateTime;dynamic lastId=0;
   if(!justButton){
     id=await dbHelper.getLastId(info.device.name) + 1;
     device= info.device.id.toString();
@@ -109,7 +109,13 @@ insertSql(
   ));
   // Fluttertoast.showToast(msg: 'sql에 저장', toastLength: Toast.LENGTH_SHORT);
   Fluttertoast.showToast(msg: '버튼 클릭', toastLength: Toast.LENGTH_SHORT);
-  dynamic col=FirebaseFirestore.instance.collection("$device").doc("$dateTime").set({
+  while(lastId<id){
+    int uploadId = lastId+1;
+    //DataBase에서 Id에 맞게 검색, 각 각 변수 업데이트.
+
+  }
+
+  await FirebaseFirestore.instance.collection("$device").doc("$dateTime").set({
     "id":id,
     "device":device,
     "patchTemp":patchTemp,
@@ -119,6 +125,10 @@ insertSql(
     "timeStamp":timeStamp,
     "dateTime":dateTime,
   }); //Fire Stroe 연동
+  await FirebaseFirestore.instance.collection("lastId").doc("lastId").update({"id":id});
+  await FirebaseFirestore.instance.collection("lastId").doc("lastId").get().then(
+      (value)=>{lastId=value['id']}
+  );
 }
 
 // 갑작스럽게 연결이 끊기거나, 끊을 때 저장
