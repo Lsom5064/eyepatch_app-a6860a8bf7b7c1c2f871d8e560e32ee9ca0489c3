@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:html';
+//import 'dart:html';
 import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/services.dart';
@@ -109,26 +109,36 @@ insertSql(
   ));
   // Fluttertoast.showToast(msg: 'sql에 저장', toastLength: Toast.LENGTH_SHORT);
   Fluttertoast.showToast(msg: '버튼 클릭', toastLength: Toast.LENGTH_SHORT);
-  while(lastId<id){
+  do{
+    await FirebaseFirestore.instance.collection("lastId").doc("lastId").get().then(
+            (value)=>{lastId=value['id']}
+    );
     int uploadId = lastId+1;
+    final List<Map<String, dynamic>> maps = await dbHelper.getBleFromId(uploadId);
     //DataBase에서 Id에 맞게 검색, 각 각 변수 업데이트.
+    id=maps[maps.length-1]['id'];
+    device= maps[maps.length-1]['device'];
+    patchTemp=maps[maps.length-1]['patchTemp'];
+    ambientTemp= maps[maps.length-1]['ambientTemp'];
+    patched= maps[maps.length-1]['patched'];
+    rawData= maps[maps.length-1]['rawData'];
+    timeStamp= maps[maps.length-1]['timeStamp'];
+    dateTime= maps[maps.length-1]['dateTime'];
+
+    await FirebaseFirestore.instance.collection("$device").doc("$dateTime").set({
+      "id":id,
+      "device":device,
+      "patchTemp":patchTemp,
+      "ambientTemp":ambientTemp,
+      "patched":patch,
+      "rawData":rawData,
+      "timeStamp":timeStamp,
+      "dateTime":dateTime,
+    }); //Fire Stroe 연동
+    await FirebaseFirestore.instance.collection("lastId").doc("lastId").update({"id":id});
 
   }
-
-  await FirebaseFirestore.instance.collection("$device").doc("$dateTime").set({
-    "id":id,
-    "device":device,
-    "patchTemp":patchTemp,
-    "ambientTemp":ambientTemp,
-    "patched":patch,
-    "rawData":rawData,
-    "timeStamp":timeStamp,
-    "dateTime":dateTime,
-  }); //Fire Stroe 연동
-  await FirebaseFirestore.instance.collection("lastId").doc("lastId").update({"id":id});
-  await FirebaseFirestore.instance.collection("lastId").doc("lastId").get().then(
-      (value)=>{lastId=value['id']}
-  );
+  while(lastId<id);
 }
 
 // 갑작스럽게 연결이 끊기거나, 끊을 때 저장

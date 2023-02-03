@@ -97,6 +97,16 @@ class DBHelper {
     return maps.isNotEmpty ? maps : null;
   }
 
+  Future<dynamic> getBleFromId(int id) async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = (await db.query(
+      'EYEPATCH',
+      where: 'id = ?',
+      whereArgs: [id],
+    ));
+    return maps.isNotEmpty ? maps : null;
+  }
+
   Future<void> dropTable() async {
     final db = await database;
     db.delete('EYEPATCH');
