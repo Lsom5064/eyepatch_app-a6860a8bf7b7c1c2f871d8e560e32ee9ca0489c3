@@ -109,22 +109,26 @@ insertSql(
   ));
   // Fluttertoast.showToast(msg: 'sql에 저장', toastLength: Toast.LENGTH_SHORT);
   Fluttertoast.showToast(msg: '버튼 클릭', toastLength: Toast.LENGTH_SHORT);
+  FireStoreInit();
   do{
     await FirebaseFirestore.instance.collection("lastId").doc("lastId").get().then(
             (value)=>{lastId=value['id']}
     );
-    int uploadId = lastId+1;
+    debugPrint("lastid = $lastId"+" id = $id");
+    int uploadId = ++lastId;
     final List<Map<String, dynamic>> maps = await dbHelper.getBleFromId(uploadId);
-    //DataBase에서 Id에 맞게 검색, 각 각 변수 업데이트.
-    id=maps[maps.length-1]['id'];
-    device= maps[maps.length-1]['device'];
-    patchTemp=maps[maps.length-1]['patchTemp'];
-    ambientTemp= maps[maps.length-1]['ambientTemp'];
-    patched= maps[maps.length-1]['patched'];
-    rawData= maps[maps.length-1]['rawData'];
-    timeStamp= maps[maps.length-1]['timeStamp'];
-    dateTime= maps[maps.length-1]['dateTime'];
 
+    debugPrint("uploadid info = "+maps.toString());
+    //DataBase에서 Id에 맞게 검색, 각 각 변수 업데이트.
+    id=maps[0]['id'];
+    device= maps[0]['device'];
+    patchTemp=maps[0]['patchTemp'];
+    ambientTemp= maps[0]['ambientTemp'];
+    patch= maps[0]['patched'];
+    rawData= maps[0]['rawData'];
+    timeStamp= maps[0]['timeStamp'];
+    dateTime= maps[0]['dateTime'];
+    //debugPrint("uploaddata info id = $id, device = $device, patchtemp = $patchTemp, ambientTemp = $ambientTemp, patched = $patched, rawData = $rawData, timeStamp = $timeStamp, dateTime = $dateTime");
     await FirebaseFirestore.instance.collection("$device").doc("$dateTime").set({
       "id":id,
       "device":device,
@@ -140,7 +144,15 @@ insertSql(
   }
   while(lastId<id);
 }
-
+FireStoreInit() async{
+  DocumentSnapshot snapshot;
+  snapshot = await FirebaseFirestore.instance
+      .collection('lastId')
+      .doc('lastId')
+      .get();
+  if(snapshot.data()==null){
+    await FirebaseFirestore.instance.collection("lastId").doc("lastId").set({"id":0});}
+}
 // 갑작스럽게 연결이 끊기거나, 끊을 때 저장
 insertCsv(ScanResult info, DBHelper dbHelper, int startedTime) {
   dbHelper.sqlToCsv(info.device.name, startedTime);
