@@ -9,7 +9,7 @@ import cloud_firestore
 import device_info_plus_macos
 import firebase_core
 import flutter_local_notifications
-import shared_preferences_macos
+import shared_preferences_foundation
 import sqflite
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {

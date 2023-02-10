@@ -29,6 +29,13 @@
             {
               "client_id": "504559553465-3aqdh2vl9askbl161l3c4j420uqvpoda.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "504559553465-593m9gd2tc3f17rland721jvlihj2l9o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.eyepatch.eyepatchApp"
+              }
             }
           ]
         }
